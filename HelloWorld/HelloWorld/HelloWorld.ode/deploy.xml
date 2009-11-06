@@ -1,0 +1,8 @@
+﻿<?xml version='1.0' encoding='UTF-8'?>
+<dd:deploy xmlns:dd="http://ode.fivesight.com/schemas/2006/06/27/dd"><dd:process xmlns:dd="http://ode.fivesight.com/schemas/2006/06/27/dd" xmlns:diag="http://example.com/HelloWorld" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:this="http://example.com/HelloWorld/HelloWorld" xmlns:Client="http://example.com/HelloWorld/Client" name="this:HelloWorld" fileName="HelloWorld-HelloWorld.bpel">
+  <dd:property name="PATH">HelloWorld</dd:property>
+  <dd:property name="SVG">HelloWorld.svg</dd:property>
+  <dd:provide partnerLink="helloWorldAndClientPlkVar">
+    <dd:service name="this:CanonicServiceForClient" port="canonicPort" />
+  </dd:provide>
+</dd:process></dd:deploy>

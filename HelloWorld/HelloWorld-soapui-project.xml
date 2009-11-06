@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="HelloWorld" resourceRoot="${projectDir}" soapui-version="3.0.1" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="CanonicBindingForClient" type="wsdl" bindingName="{http://example.com/HelloWorld/HelloWorld}CanonicBindingForClient" soapVersion="1_1" anonymous="optional" definition="../../git/server/intalio-bpms-ee-6.0.3.002-tomcat-5-5.5.26/var/deploy/HelloWorld/HelloWorld.ode/HelloWorld-HelloWorld.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/git/server/intalio-bpms-ee-6.0.3.002-tomcat-5-5.5.26/var/deploy/HelloWorld/HelloWorld.ode/HelloWorld-HelloWorld.wsdl"><con:part><con:url>file:/git/server/intalio-bpms-ee-6.0.3.002-tomcat-5-5.5.26/var/deploy/HelloWorld/HelloWorld.ode/HelloWorld-HelloWorld.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://example.com/HelloWorld/HelloWorld" xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:diag="http://example.com/HelloWorld" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:pnlk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:this="http://example.com/HelloWorld/HelloWorld" xmlns:Client="http://example.com/HelloWorld/Client">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://example.com/HelloWorld/HelloWorld">
+      <xs:element name="Receive__MessageRequest" type="xs:string"/>
+      <xs:element name="Receive__MessageResponse" type="xs:string"/>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="Receive__MessageRequest">
+    <wsdl:part name="body" element="this:Receive__MessageRequest"/>
+  </wsdl:message>
+  <wsdl:message name="Receive__MessageResponse">
+    <wsdl:part name="body" element="this:Receive__MessageResponse"/>
+  </wsdl:message>
+  <wsdl:portType name="ForClient">
+    <wsdl:operation name="Receive__Message">
+      <wsdl:input message="this:Receive__MessageRequest" name="Receive__Message"/>
+      <wsdl:output message="this:Receive__MessageResponse" name="Receive__MessageResponse"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CanonicBindingForClient" type="this:ForClient">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Receive__Message">
+      <soap:operation style="document" soapAction="http://example.com/HelloWorld/HelloWorld/ForClient/Receive__Message"/>
+      <wsdl:input>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CanonicServiceForClient">
+    <wsdl:port name="canonicPort" binding="this:CanonicBindingForClient">
+      <soap:address location="http://localhost:8080/ode/processes/HelloWorld/HelloWorld/HelloWorld/Client"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/ode/processes/HelloWorld/HelloWorld/HelloWorld/Client</con:endpoint></con:endpoints><con:operation isOneWay="false" action="http://example.com/HelloWorld/HelloWorld/ForClient/Receive__Message" name="Receive__Message" bindingOperationName="Receive__Message" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ode/processes/HelloWorld/HelloWorld/HelloWorld/Client</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hel="http://example.com/HelloWorld/HelloWorld">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <hel:Receive__MessageRequest>Sean</hel:Receive__MessageRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://example.com/HelloWorld/HelloWorld/ForClient/Receive__Message"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="CanonicBindingForClient TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="Receive__Message TestCase" searchProperties="true" id="f9b0f96f-300b-4770-a33a-1ea2a1c1f823"><con:settings/><con:testStep type="request" name="Receive__Message"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CanonicBindingForClient</con:interface><con:operation>Receive__Message</con:operation><con:request name="Receive__Message"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ode/processes/HelloWorld/HelloWorld/HelloWorld/Client</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:hel="http://example.com/HelloWorld/HelloWorld">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <hel:Receive__MessageRequest>Oleg</hel:Receive__MessageRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Fault Assertion"/><con:assertion type="SOAP Response"/><con:assertion type="XPath Match"><con:configuration><path>declare namespace ns1='http://example.com/HelloWorld/HelloWorld';
+declare namespace soapenv='http://schemas.xmlsoap.org/soap/envelope/';
+//ns1:Receive__MessageResponse</path><content>Hello, Oleg!</content><allowWildcards>false</allowWildcards><ignoreNamspaceDifferences>false</ignoreNamspaceDifferences></con:configuration></con:assertion><con:wsaConfig action="http://example.com/HelloWorld/HelloWorld/ForClient/Receive__Message" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/></con:soapui-project>

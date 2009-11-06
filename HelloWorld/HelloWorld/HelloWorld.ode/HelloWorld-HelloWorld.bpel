@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<bpel:process xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:pnlk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:this="http://example.com/HelloWorld/HelloWorld" xmlns:diag="http://example.com/HelloWorld" xmlns:Client="http://example.com/HelloWorld/Client" xmlns:bpmn="http://www.intalio.com/bpms" xmlns:atomic="http://ode.apache.org/atomicScope" queryLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0" expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath2.0" bpmn:label="HelloWorld" bpmn:id="_oaG28AbaEd2kv-ppJQnZ5A" name="HelloWorld" targetNamespace="http://example.com/HelloWorld/HelloWorld">
+  <bpel:import namespace="http://example.com/HelloWorld" location="HelloWorld.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+  <bpel:import namespace="http://example.com/HelloWorld/HelloWorld" location="HelloWorld-HelloWorld.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+  <bpel:partnerLinks>
+    <bpel:partnerLink name="helloWorldAndClientPlkVar" partnerLinkType="diag:HelloWorldAndClient" myRole="HelloWorld_for_Client"/>
+  </bpel:partnerLinks>
+  <bpel:variables>
+    <bpel:variable name="thisReceive__MessageRequest" messageType="this:Receive__MessageRequest"/>
+    <bpel:variable name="thisReceive__MessageResponse" messageType="this:Receive__MessageResponse"/>
+  </bpel:variables>
+  <bpel:sequence>
+    <bpel:receive partnerLink="helloWorldAndClientPlkVar" portType="this:ForClient" operation="Receive__Message" variable="thisReceive__MessageRequest" createInstance="yes" bpmn:label="Receive&#10; Message" bpmn:id="_vWQJsAbaEd2kv-ppJQnZ5A"></bpel:receive>
+    <bpel:assign name="init-variables-HelloWorld">
+      <bpel:copy bpmn:label="$thisReceive__MessageResponse">
+        <bpel:from>
+          <bpel:literal>
+<this:Receive__MessageResponse>
+</this:Receive__MessageResponse></bpel:literal>
+        </bpel:from>
+        <bpel:to>$thisReceive__MessageResponse.body</bpel:to>
+      </bpel:copy>
+    </bpel:assign>
+    <bpel:assign bpmn:label="Add &quot;Hello&quot;" bpmn:id="_3hfFwAbaEd2kv-ppJQnZ5A">
+      <bpel:copy>
+        <bpel:from>concat(concat("Hello, ", $thisReceive__MessageRequest.body/text()), "!")</bpel:from>
+        <bpel:to>$thisReceive__MessageResponse.body</bpel:to>
+      </bpel:copy>
+    </bpel:assign>
+    <bpel:reply partnerLink="helloWorldAndClientPlkVar" portType="this:ForClient" operation="Receive__Message" variable="thisReceive__MessageResponse" bpmn:label="Send Response" bpmn:id="_8V2zsAbaEd2kv-ppJQnZ5A"></bpel:reply>
+  </bpel:sequence>
+</bpel:process>

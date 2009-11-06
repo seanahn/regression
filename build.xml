@@ -1,0 +1,50 @@
+<project basedir="." default="run">
+  <property name="testrunner" location="soapui-3.0/bin/testrunner.sh"/>
+  <property name="reportDir" location="${basedir}/results"/>
+  <property name="deployDir" location="/git/server/intalio-bpms-ee-6.0.3.002-tomcat-5-5.5.26/var/deploy/"/>
+
+  <taskdef resource="net/sf/antcontrib/antcontrib.properties">
+    <classpath>
+      <pathelement location="lib/ant-contrib.jar"/>
+    </classpath>
+  </taskdef>
+
+  <path id="projects">
+    <!-- TODO: specify your test projects here -->
+    <pathelement location="HelloWorld" />
+  </path>
+
+  <target name="clean">
+    <delete failonerror="false">
+      <fileset dir="${reportDir}" includes="**/*"/>
+    </delete>
+  </target>
+
+  <target name="test" depends="clean">
+    <foreach param="file" target="runSuite">
+      <path id="files">
+        <pathelement location="HelloWorld" />
+      </path>
+    </foreach>
+  </target>
+
+  <target name="runSuite">
+    <propertyregex override="yes"
+        property="project"  input="${file}"
+        regexp=".*/(.*)" replace="\1"/>
+    <echo>Running soapUI on ${project}</echo>
+    <copy todir="${deployDir}"><fileset dir="${project}/${project}"/></copy>
+    <waitfor maxwait="30" maxwaitunit="second"><available file="${deployDir}/${project}.deployed"/></waitfor>
+    <exec command="${testrunner} -j -f${reportDir} ${project}/${project}-soapui-project.xml"/>
+    <delete dir="${deployDir}/${project}"/>
+  </target>
+
+  <target name="run" depends="test">
+    <junitreport todir="${reportDir}">
+      <fileset dir="${reportDir}">
+        <include name="TEST-*.xml"/>
+      </fileset>
+      <report format="frames" todir="${reportDir}"/>
+    </junitreport>
+  </target>
+</project>

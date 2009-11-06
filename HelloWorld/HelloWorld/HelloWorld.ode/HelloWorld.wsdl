@@ -1,0 +1,7 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<wsdl:definitions xmlns:bpdm="http://www.intalio/designer/business-process-data-modeling" xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable" xmlns:diag="http://example.com/HelloWorld" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:pnlk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:Client="http://example.com/HelloWorld/Client" xmlns:HelloWorld="http://example.com/HelloWorld/HelloWorld" targetNamespace="http://example.com/HelloWorld">
+    <wsdl:import namespace="http://example.com/HelloWorld/HelloWorld" location="HelloWorld-HelloWorld.wsdl"/>
+    <pnlk:partnerLinkType name="HelloWorldAndClient">
+        <pnlk:role name="HelloWorld_for_Client" portType="HelloWorld:ForClient"/>
+    </pnlk:partnerLinkType>
+</wsdl:definitions>

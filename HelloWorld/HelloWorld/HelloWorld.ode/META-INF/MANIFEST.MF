@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+Created-By: Buildr
+Build-By: release
+Build-Jdk: 1.5.0_13
+Implementation-Title: Sample Processes
+Implementation-Version: 0.3
